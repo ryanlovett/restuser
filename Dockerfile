@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 RUN mkdir -p /var/run/restuser
 VOLUME /var/run/restuser
 
-RUN mkdir -p /srv/restuser
-WORKDIR /srv/restuser
-COPY requirements.txt /srv/restuser/
+RUN mkdir -p /var/local/jupyterhub/restuser
+WORKDIR /var/local/jupyterhub/restuser
+COPY requirements.txt /var/local/jupyterhub/restuser/
 RUN pip3 install -r requirements.txt
 
-COPY restuser.py /srv/restuser/
+COPY restuser.py /var/local/jupyterhub/restuser/
 
-CMD ["python3", "/srv/restuser/restuser.py", "--socket=/var/run/restuser/restuser.sock"]
+CMD ["python3", "/var/local/jupyterhub/restuser/restuser.py", "--socket=/var/run/restuser/restuser.sock"]
